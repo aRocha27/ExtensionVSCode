@@ -1,0 +1,116 @@
+=== Snippet #5 ===
+File: src/api.ts  Lines: 29-22  Priority: 5  Status: Uncommented
+Tags: Uncommented
+export async function fetchData(url: string) {
+  const res = await fetch(url);
+  return res.json();
+}
+
+---
+
+=== Funcao Ratomanuocu ===
+File: c:\Users\antro\Documents\Percorsi\app\api\stripe\checkout\route.ts  Lines: 7-23  Priority: 3  Status: Commented
+Tags: route, api
+try {
+    const { productId } = await request.json();
+
+    const product = getProduct(productId);
+    if (!product) {
+      return NextResponse.json(
+        { error: "Product not found" },
+        { status: 400 }
+      );
+    }
+
+    const supabase = await createClient();
+    // Use getSession() for speed — reads from cookies, no network round-trip.
+    // The middleware already refreshes tokens on page navigations.
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+Faz um loop inserido em ciencia
+
+---
+
+=== Teste ===
+File: c:\Users\antro\Documents\Percorsi\app\api\stripe\checkout\route.ts  Lines: 20-31  Priority: 3  Status: Commented
+Tags: working, error
+/ The middleware already refreshes tokens on page navigations.
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    const user = session?.user;
+    if (!user) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
+Works
+
+---
+
+=== PRoduct ID ===
+File: c:\Users\antro\Documents\Percorsi\app\api\stripe\checkout\route.ts  Lines: 8-17  Priority: 3  Status: Commented
+Tags: bugfix, product
+const { productId } = await request.json();
+
+    const product = getProduct(productId);
+    if (!product) {
+      return NextResponse.json(
+        { error: "Product not found" },
+        { status: 400 }
+      );
+    }
+
+
+ELe da get ao Product ID
+
+---
+
+=== Este ta mais ou menos ===
+File: c:\Users\antro\Documents\Percorsi\app\api\stripe\checkout\route.ts  Lines: 94-111  Priority: 3  Status: Commented
+Tags: bugfix
+  quantity: 1,
+        },
+      ],
+    };
+
+    if (product.mode === "subscription") {
+      (sessionParams as Record<string, unknown>).subscription_data = {
+        metadata: {
+          user_id: user.id,
+          plan_key: product.planKey,
+        },
+      };
+    }
+
+    const checkoutSession = await stripe.checkout.sessions.create(
+      sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]
+    );
+
+
+Ele trabalha
+
+---
+
+=== Teste 2 ===
+File: c:\Users\antro\Documents\Percorsi\app\api\stripe\checkout\route.ts  Lines: 43-54  Priority: 4  Status: Commented
+Tags: bugfix
+ if (customerId) {
+      try {
+        const existingCustomer = await stripe.customers.retrieve(customerId);
+        // If customer was deleted in Stripe, treat as no customer
+        if (existingCustomer.deleted) {
+          customerId = null;
+        }
+      } catch {
+        // Customer doesn't exist in Stripe - clear it and create a new one
+        customerId = null;
+      }
+    }
+
+Este tabem trabalha

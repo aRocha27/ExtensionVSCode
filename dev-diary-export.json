@@ -1,0 +1,101 @@
+[
+  {
+    "id": "fd8126ce-43f4-4efa-9c17-c27ef1cd8e64",
+    "title": "Snippet #5",
+    "filePath": "src/api.ts",
+    "lineStart": 29,
+    "lineEnd": 22,
+    "codeSnippet": "export async function fetchData(url: string) {\n  const res = await fetch(url);\n  return res.json();\n}",
+    "description": "",
+    "tags": [
+      "Uncommented"
+    ],
+    "priority": 5,
+    "status": "Uncommented",
+    "createdAt": "2026-02-21T00:50:32.806Z",
+    "updatedAt": "2026-02-21T00:50:32.806Z"
+  },
+  {
+    "id": "d86b0890-097f-4ce2-8a66-4476c176b262",
+    "title": "Funcao Ratomanuocu",
+    "filePath": "c:\\Users\\antro\\Documents\\Percorsi\\app\\api\\stripe\\checkout\\route.ts",
+    "lineStart": 7,
+    "lineEnd": 23,
+    "codeSnippet": "try {\n    const { productId } = await request.json();\n\n    const product = getProduct(productId);\n    if (!product) {\n      return NextResponse.json(\n        { error: \"Product not found\" },\n        { status: 400 }\n      );\n    }\n\n    const supabase = await createClient();\n    // Use getSession() for speed — reads from cookies, no network round-trip.\n    // The middleware already refreshes tokens on page navigations.\n    const {\n      data: { session },\n    } = await supabase.auth.getSession();",
+    "description": "Faz um loop inserido em ciencia",
+    "tags": [
+      "route",
+      "api"
+    ],
+    "priority": 3,
+    "status": "Commented",
+    "createdAt": "2026-02-21T12:44:03.508Z",
+    "updatedAt": "2026-02-21T12:44:03.508Z"
+  },
+  {
+    "id": "6cfb1e17-4b85-4538-ab62-50c7e932d895",
+    "title": "Teste",
+    "filePath": "c:\\Users\\antro\\Documents\\Percorsi\\app\\api\\stripe\\checkout\\route.ts",
+    "lineStart": 20,
+    "lineEnd": 31,
+    "codeSnippet": "/ The middleware already refreshes tokens on page navigations.\n    const {\n      data: { session },\n    } = await supabase.auth.getSession();\n\n    const user = session?.user;\n    if (!user) {\n      return NextResponse.json(\n        { error: \"Authentication required\" },\n        { status: 401 }\n      );\n    }",
+    "description": "Works",
+    "tags": [
+      "working",
+      "error"
+    ],
+    "priority": 3,
+    "status": "Commented",
+    "createdAt": "2026-02-21T00:46:27.703Z",
+    "updatedAt": "2026-02-21T00:46:27.703Z"
+  },
+  {
+    "id": "5e4f175e-095e-48be-9b8d-f6102099a8ce",
+    "title": "PRoduct ID",
+    "filePath": "c:\\Users\\antro\\Documents\\Percorsi\\app\\api\\stripe\\checkout\\route.ts",
+    "lineStart": 8,
+    "lineEnd": 17,
+    "codeSnippet": "const { productId } = await request.json();\n\n    const product = getProduct(productId);\n    if (!product) {\n      return NextResponse.json(\n        { error: \"Product not found\" },\n        { status: 400 }\n      );\n    }\n",
+    "description": "ELe da get ao Product ID",
+    "tags": [
+      "bugfix",
+      "product"
+    ],
+    "priority": 3,
+    "status": "Commented",
+    "createdAt": "2026-02-21T00:50:24.641Z",
+    "updatedAt": "2026-02-21T00:50:24.641Z"
+  },
+  {
+    "id": "dc60c861-054b-4c96-b2b1-f5346d578662",
+    "title": "Este ta mais ou menos",
+    "filePath": "c:\\Users\\antro\\Documents\\Percorsi\\app\\api\\stripe\\checkout\\route.ts",
+    "lineStart": 94,
+    "lineEnd": 111,
+    "codeSnippet": "  quantity: 1,\n        },\n      ],\n    };\n\n    if (product.mode === \"subscription\") {\n      (sessionParams as Record<string, unknown>).subscription_data = {\n        metadata: {\n          user_id: user.id,\n          plan_key: product.planKey,\n        },\n      };\n    }\n\n    const checkoutSession = await stripe.checkout.sessions.create(\n      sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]\n    );\n",
+    "description": "Ele trabalha",
+    "tags": [
+      "bugfix"
+    ],
+    "priority": 3,
+    "status": "Commented",
+    "createdAt": "2026-02-21T00:47:46.167Z",
+    "updatedAt": "2026-02-21T00:47:46.167Z"
+  },
+  {
+    "id": "f01059e5-cf06-4157-8579-5ff024e41547",
+    "title": "Teste 2",
+    "filePath": "c:\\Users\\antro\\Documents\\Percorsi\\app\\api\\stripe\\checkout\\route.ts",
+    "lineStart": 43,
+    "lineEnd": 54,
+    "codeSnippet": " if (customerId) {\n      try {\n        const existingCustomer = await stripe.customers.retrieve(customerId);\n        // If customer was deleted in Stripe, treat as no customer\n        if (existingCustomer.deleted) {\n          customerId = null;\n        }\n      } catch {\n        // Customer doesn't exist in Stripe - clear it and create a new one\n        customerId = null;\n      }\n    }",
+    "description": "Este tabem trabalha",
+    "tags": [
+      "bugfix"
+    ],
+    "priority": 4,
+    "status": "Commented",
+    "createdAt": "2026-02-21T00:47:25.817Z",
+    "updatedAt": "2026-02-21T00:47:25.817Z"
+  }
+]
